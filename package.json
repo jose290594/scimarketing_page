@@ -1,0 +1,10 @@
+
+{
+  "dependencies": {
+    "tailwindcss": "^3.3.3"
+  },
+  "scripts": {
+    "build-css": "tailwindcss build misc/tailwind_opt.css -o assets/public/tailwind/tailwind.min.css"
+  }
+
+}

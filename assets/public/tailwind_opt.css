@@ -1,0 +1,396 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500&display=swap');
+
+html {
+    overflow-y: hidden;
+    overflow-x: hidden;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+}
+
+#react-entry-point {
+    overflow-y: hidden;
+    overflow-x: hidden;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+}
+
+.body {
+    overflow-y: hidden;
+    overflow-x: hidden;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+}
+
+.main-container {
+    scroll-snap-type: x mandatory;	
+    display: flex;
+	-webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    overflow: auto hidden; /* Habilitar el scroll interno */
+    white-space: nowrap; /* Evitar el salto de línea para los sub-Divs */
+}
+.main-container::-webkit-scrollbar{
+    display: none;
+}
+.carousel-arrows {
+    font-size: 4rem;
+    position: absolute;
+    float: left;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 2;
+}
+
+.carousel-arrow {
+    -webkit-background-clip: text;
+    background-color: transparent;
+    background-size: 100% 100%;
+    border-color: transparent;
+    z-index: 4;
+}
+.carousel-arrow:hover {
+    animation: floatArrow 1.25s ease-in-out infinite;
+}
+
+.prev {
+    position: fixed;
+    bottom: 42%;
+    left: 0%;
+    font-size: 4rem;
+    z-index: 5;
+}
+
+.next {
+    position: fixed;
+    bottom: 42%;
+    right: 0%;
+    font-size: 4rem;
+    z-index: 5;
+}
+
+@keyframes floatArrow  {
+    0% {
+        background-color: transparent;
+        background-position: -100% 0;
+        transform: scale(1);
+    }
+    50% {
+        background-position: -50% 0;
+        transform: scale(1.2);
+    }
+    100% {
+        background-position: 0 0;
+        background-color: red;
+        transform: scale(1);
+    }
+}
+.sci-slide {
+    height: 100vh;
+    min-width: 100vw;
+    position: relative;
+    scroll-snap-align: start;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    overflow: hidden;
+}
+
+.sci-slide-1 {
+    font-family: 'Quicksand' !important;
+    font-weight: 500 !important;
+    color: rgb(68, 68, 68);
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.sci-title-1 {
+    font-size: 6rem;
+    text-align: center;    
+}
+
+.sci-logo {
+    width: 100vw;
+    height: 25vh;
+}
+
+.sci-title-2 {
+    font-size: 6rem;
+    text-align: center;
+}
+
+.sci-slide-2 {
+    font-family: 'Quicksand' !important;
+    color: rgb(68, 68, 68);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas */
+    align-content: space-evenly;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.sci-intro-1 {
+    display: grid;
+    justify-self: normal;
+    align-self: stretch;
+    place-items: center;
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas */
+}
+
+.sci-intro-2 {
+    font-size: 1.9rem;
+    text-wrap: wrap;
+    width: 100%;
+    padding: 0 10% 0 10%;
+}
+.sci-word {
+    text-align: center;
+    font-family: 'Quicksand' !important;
+    font-size: 5.6rem;
+    font-weight: 800 !important;
+}
+
+.sci-slogan {
+    text-align: justify;
+}
+
+.sci-slide-3 {
+    font-family: 'Quicksand' !important;
+    color: rgb(68, 68, 68);
+    display: grid;
+    grid-template-columns: 24% 24% 24% 24%; /* 4 columnas */
+    justify-items: center;
+    align-items: center;
+    justify-content: center;
+    grid-gap: 2%;
+    margin: 0 0 0 0;
+    padding: 2% 2% 2% 2%;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.sci-service-img {
+    justify-self: right;
+    max-width: 25%;
+    transition: transform 0.45s ease;
+}
+.sci-service-card {
+    border-radius: 25px;
+    font-size: 1.6rem;
+    font-weight: 900;
+    text-wrap: wrap;
+    display: grid;
+    align-self: stretch;
+    place-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: rgba(252, 115, 115, 0.637);
+    background-position: -100% 0;
+    background-color: rgba(255, 255, 255, 0.596);
+    grid-template-columns: 1fr; /* 2 columnas */
+    padding: 2% 8% 2% 8%;
+    cursor: pointer; /* Cambia el cursor a una mano al hacer hover */
+    transition: background-color 0.35s ease;
+}
+
+.sci-service-card:hover {
+    background-color: rgba(255, 103, 103, 0.596);
+}
+.sci-service-card:hover > .sci-service-img {
+    transform: rotate(360deg);
+}
+
+.sci-slide-5 {
+  font-family: 'Quicksand' !important;
+  color: rgb(68, 68, 68);
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  margin: 0 0 0 0;
+  padding: 2% 2% 2% 2%;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.sci-container-form {
+  display: grid;
+  width: 100%;
+  height: 100%;
+}
+.sci-contact-form {
+  text-wrap: wrap;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+@media (min-width: 10px) {
+    .sci-container-form {
+        transform: scale(0.9);
+    }
+    .sci-slide-1 {
+        align-content: center;
+    }
+    .sci-logo {
+        width: 100vw;
+        height: 15vh;
+    }
+    .sci-title-1 {
+        font-size: 5rem;
+        text-align: center;    
+    }
+    .sci-title-2 {
+        font-size: 4rem;
+        text-align: center;    
+    }
+    .sci-slide-2 {
+        grid-template-columns: 1fr; /* 1 columna */
+        align-content: center;
+    }
+    .sci-word {
+        font-size: 3rem;
+    }
+    .sci-intro-2 {
+        font-size: 2vmax;
+        text-wrap: wrap;
+        width: 100%;
+        padding: 0 10% 0 10%;
+        align-self: center;
+    }
+    .sci-slide-3 {
+        padding: 2% 2% 16% 2%;
+        grid-template-columns: 49% 49%; /* 4 columnas */
+    }
+}
+
+@media (min-width: 320px) {
+    .sci-container-form {
+        transform: scale(0.9);
+    }
+    .sci-slide-1 {
+        align-content: center;
+    }
+    .sci-logo {
+        width: 100vw;
+        height: 15vh;
+    }
+    .sci-title-1 {
+        font-size: 5rem;
+        text-align: center;    
+    }
+    .sci-title-2 {
+        font-size: 4rem;
+        text-align: center;    
+    }
+    .sci-slide-2 {
+        grid-template-columns: 1fr; /* 1 columna */
+        align-content: center;
+    }
+    .sci-word {
+        font-size: 3rem;
+    }
+    .sci-intro-2 {
+        font-size: 2vmax;
+        text-wrap: wrap;
+        width: 100%;
+        padding: 0 10% 0 10%;
+        align-self: center;
+    }
+    .sci-slide-3 {
+        grid-template-columns: 49% 49%; /* 4 columnas */
+    }
+}
+@media (min-width: 576px) {
+    .sci-container-form {
+        transform: scale(1.1);
+    }
+
+    .sci-logo {
+        width: 100vw;
+        height: 20vh;
+    }
+
+    .sci-title-1 {
+        font-size: 6rem;
+        text-align: center;    
+    }
+    .sci-title-2 {
+        font-size: 6rem;
+        text-align: center;    
+    }
+    .sci-word {
+        font-size: 4.2rem;
+    }
+    .sci-intro-2 {
+        font-size: 2.7vmax;
+    }
+}
+@media (min-width: 768px) {
+    .sci-container-form {
+        transform: scale(1.1);
+    }
+    .sci-logo {
+        width: 100vw;
+        height: 25vh;
+    }
+    .sci-slide-2 {
+        grid-template-columns: 1fr 1fr; /* 2 columna */
+        align-content: space-evenly;
+    }
+    .sci-intro-2 {
+        font-size: 2.2vmax;
+    }
+    .sci-slide-3 {
+        padding: 2% 2% 2% 2%;
+        grid-template-columns: 24% 24% 24% 24%; /* 4 columnas */
+    }
+}
+@media (min-width: 992px) {
+    .sci-container-form {
+        transform: scale(1.3);
+    }
+    .sci-intro-2 {
+        font-size: 2.2vmax;
+    }
+}
+@media (min-width: 1200px) {
+    .sci-container-form {
+        transform: scale(1.3);
+    }
+    .sci-word {
+        font-size: 5.2rem;
+    }
+    .sci-intro-2 {
+        font-size: 1.8vmax;
+    }
+}
+@media (min-width: 1400px) {
+    .sci-container-form {
+        transform: scale(1.2);
+    }
+}
+

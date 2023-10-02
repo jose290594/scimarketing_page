@@ -1,0 +1,9 @@
+misc/
+node_modules/
+old/
+assets/bg/diagonalrain.html
+assets/bg/lateralrain.html
+assets/bg/lineardrop.html
+assets/bg/othersiderain.html
+
+
