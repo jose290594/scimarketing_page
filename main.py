@@ -4,9 +4,12 @@ from dash import (
     Input, 
     Output, 
     State,
-    clientside_callback
+    ALL,
+    callback,
+    clientside_callback,
+    no_update
 )
-from dash.dcc import Input as dcc_input
+from dash.dcc import Input as dcc_input, Tooltip as dcc_tooltip
 from flask.app import Flask
 import regex as re
 import time
@@ -176,9 +179,15 @@ app.layout = html.Div(
                                     service[1]['title'], 
                                     className='sci-service-title'
                                 ),
-                            ], className='sci-service-card'
+                            ], className='sci-service-card',
+                            id={
+                                'type': 'sci-service-card', 
+                                'index': service[1]['title']
+                            }
                         )
                         for service in services_dict.items()
+                    ]+[
+                        dcc_tooltip(id="graph-tooltip", className="sci-tooltip"),
                     ], className='sci-slide sci-slide-3',
                     style={
                         'background-image': 'url(assets/bg/lateralrain.svg)',
@@ -204,7 +213,7 @@ app.layout = html.Div(
                                         'font-weight':'900',
                                     }
                                 ),
-                                html.Form(
+                                html.Div(
                                     [
                                         html.Div(
                                             [
@@ -217,6 +226,7 @@ app.layout = html.Div(
                                                     id="sci-name-form", 
                                                     placeholder="Enter a name...",
                                                     required=True,
+                                                    style={'border-radius': '3px'}
                                                 ),
                                             ],
                                             className="",
@@ -230,9 +240,10 @@ app.layout = html.Div(
                                                 ),
                                                 dcc_input(
                                                     type="email", 
-                                                    id="polar-email-form", 
+                                                    id="sci-email-form", 
                                                     placeholder="Enter an email to get in touch...",
                                                     required=True,
+                                                    style={'border-radius': '3px'}
                                                 ),
                                             ],
                                             className="",
@@ -247,6 +258,7 @@ app.layout = html.Div(
                                                 html.Textarea(
                                                     id="sci-msg-form", 
                                                     placeholder="write about what your needs are...",
+                                                    style={'border-radius': '4px'}
                                                 ),
                                             ],
                                             className="",
@@ -254,19 +266,17 @@ app.layout = html.Div(
                                         ),
                                         html.Button(
                                             children="Send", 
-                                            n_clicks=0, 
                                             id="sci-submit-button",
-                                            className="",
                                             style={
                                                 "font-weight": "900",
-                                                "font-style": "italic"
+                                                "font-style": "italic",
+                                                "z-index": "5",
                                             }
                                         ),
                                     ], 
                                     className="""
                                         sci-contact-form
-                                    """,
-                                    method="POST",                            
+                                    """,                            
                                 ),
                                 html.A(
                                     'Or',
@@ -334,13 +344,13 @@ app.layout = html.Div(
 )
 
 
-@app.callback(
+@callback(
     [Output("sci-submit-button", "children"),
     Output("sci-submit-button", "disabled"),],
-    Input("sci-submit-button", "n_clicks"),
+    [Input("sci-submit-button", "n_clicks"),],
     [State("sci-name-form", "value"),
     State("sci-email-form", "value"),
-    State("sci-msg-form", "value"),],
+    State("sci-msg-form", "children"),],
     prevent_initial_call=True,
 )
 def ask_for_help(n_clicks, name, email, msg):
@@ -358,39 +368,29 @@ def ask_for_help(n_clicks, name, email, msg):
 
             return "SENT!", True
         else:
-            return "Error!", False
+            return "Error or field missing!", False
     else:
         return "Send", False
 
-clientside_callback(
-    """
-    function() {
-        let scrollContainer = document.getElementById('main-container')
-
-        ctx = dash_clientside.callback_context.triggered[0].prop_id
-        
-        if (ctx == 'prev.n_clicks') {
-            scrollContainer.scrollBy({
-                left: -scrollContainer.clientWidth,
-                behavior: 'smooth',
-            })
-            return dash_clientside.no_update
-        }
-        
-        if (ctx == 'next.n_clicks') {
-            scrollContainer.scrollBy({
-                left: scrollContainer.clientWidth,
-                behavior: 'smooth',
-            })
-            return dash_clientside.no_update
-        }
-    }
-    """,
-    Output("main-container", "children"),
-    Input("prev", "n_clicks"),
-    Input("next", "n_clicks"),
+@callback(
+    Output("graph-tooltip", "show"),
+    Output("graph-tooltip", "children"),
+    Input({"type": "sci-service-card", "index":ALL}, "n_clicks"),
+    [State({"type": "sci-service-card", "index":ALL}, "id"),],
     prevent_initial_call=True,
 )
+def display_hover(nclicks, service):
+    if service is None:
+        return False, no_update, no_update
+    children = [
+        html.Div([
+            html.H3(str(service)),
+        ], style={'width': '200px', 'white-space': 'normal'})
+    ]
+
+    return True, children
+
+
 clientside_callback(
     """
     function() {
@@ -422,4 +422,4 @@ clientside_callback(
 )
 
 if __name__ == '__main__':
-    app.run_server('0.0.0.0', debug=False)
+    app.run_server('0.0.0.0', debug=True)
